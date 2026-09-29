@@ -1,5 +1,5 @@
 export class Conta {
-    #saldo = 0;
+    #saldo = 0; // campo privado: só o código DENTRO desta classe enxerga
     #titular;
 
     constructor(numero, titular) {
@@ -7,9 +7,9 @@ export class Conta {
         throw new Error('Conta é abstrata: crie ContaCorrente ou ContaPoupanca');
         }
         this.numero = numero;
-        this.titular = titular;
-  }
-   
+        this.titular = titular; // passa pelo setter abaixo
+      }
+// getter: leitura liberada. Não há setter: escrever, só por depositar/sacar
     get saldo(){
         return this.#saldo;
     }
@@ -21,7 +21,7 @@ export class Conta {
     get titular(){
         return this.#titular;
     }
-
+ // setter: escrita liberada, mas com regra
     set titular(nome){
         if(typeof nome !== 'string' || nome.trim().length < 3){
             throw new Error('Titular inválido');
@@ -35,7 +35,7 @@ export class Conta {
 
         this.#saldo += valor;
     }
-
+  // (novo) quanto dá para sacar agora? As subclasses podem redefinir.
     saldoDisponivel() {
         return this.#saldo;
     }
@@ -45,10 +45,11 @@ export class Conta {
         if (valor > this.saldoDisponivel()) throw new Error('Saldo insuficiente');
         this.#saldo -= valor;
   }
+   // "método abstrato": cada tipo de conta TEM de dizer quanto cobra
   tarifaMensal() {
     throw new Error('tarifaMensal() precisa ser implementado na subclasse');
   }
-
+ // sobrescrevendo um método que veio de Object.prototype
   toString() {
     return `${this.constructor.name} ${this.numero} · ${this.titular} · R$ ${this.saldo.toFixed(2)}`;
   }

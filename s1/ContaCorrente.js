@@ -1,13 +1,13 @@
 import { Conta } from "./Conta.js";
 
-
+// s1/ContaCorrente.js
 export class ContaCorrente extends Conta {
   constructor(numero, titular, limite = 500) {
-    super(numero, titular);
+    super(numero, titular);// obrigatório ANTES de usar this
     this.limite = limite;
   }
 
-  
+  // sobrescrita: conta corrente pode entrar no limite
   saldoDisponivel() {
     return this.saldo + this.limite;
   }
