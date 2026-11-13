@@ -10,7 +10,7 @@ A Locadora aluga veiculos e Cada Locação registra quem pegou, qual veículo e 
 | Entidade | Atributos | Relacionamentos |
 |---|---|---|
 | Veículo | id, modelo, marca, ano, cor, placa, valorDiaria,status | aparece em várias locações |
-| Usuário | id, nome, email | faz várias Locações |
+| Cliente | id, nome, email,cpf | faz várias Locações |
 | Locação | id, veiculoId, usuarioId, dataRetirada, status | pertence a um veículo e a um usuário |
 
 ## 3. Diagrama de classes
@@ -31,10 +31,11 @@ classDiagram
     +aterarStatusAlocado()
     +aterarStatusDisponivel()
   }
-  class Usuario {
+  class cliente {
     +id
     +nome
     +email
+    +cpf
   }
   class Locacao{
     +id
