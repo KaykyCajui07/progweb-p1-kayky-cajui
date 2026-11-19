@@ -1,0 +1,16 @@
+/* O Bootstrap faz quase tudo. Aqui ficam só os ajustes próprios. */
+
+/* A linha que está sendo editada fica destacada */
+tr.editando > td {
+  background-color: var(--bs-warning-bg-subtle);
+}
+
+/* Números alinhados em colunas (CPF, ano, diária) */
+.numero {
+  font-variant-numeric: tabular-nums;
+}
+
+.placa {
+  font-family: var(--bs-font-monospace);
+  letter-spacing: 0.04em;
+}
