@@ -1,4 +1,5 @@
 import { clienteModel } from '../models/clienteModel.js';
+import { locacaoModel } from '../models/locacaoModel.js';
 import { erro } from '../utils/erro.js';
 
 export const clienteService = {
@@ -29,6 +30,7 @@ export const clienteService = {
   },
 
   remover(id) {
+    if (locacaoModel.existeAtivaDoCliente(id)) throw erro(409, 'Cliente com locação ativa não pode ser removido');
     const removido = clienteModel.remover(id);
     if (!removido) throw erro(404, 'Cliente não encontrado');
   },
