@@ -35,7 +35,11 @@ export const veiculoService = {
   },
 
   remover(id) {
-    if (locacaoModel.existeAtivaDoVeiculo(id)) throw erro(409, 'Veículo com locação ativa não pode ser removido');
+    if (locacaoModel.existeAtivaDoVeiculo(id))
+      throw erro(409, 'Veículo com locação ativa não pode ser removido');
+    // Regra (S5): o histórico de locações é protegido pela chave estrangeira
+    if (locacaoModel.existeDoVeiculo(id))
+      throw erro(409, 'Veículo possui histórico de locações e não pode ser removido');
     const removido = veiculoModel.remover(id);
     if (!removido) throw erro(404, 'Veículo não encontrado');
   },
