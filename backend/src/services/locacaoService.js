@@ -4,7 +4,7 @@ import { clienteModel } from '../models/clienteModel.js';
 import { erro } from '../utils/erro.js';
 
 // Regra de negócio da locadora (MODELAGEM.md): locar e devolver.
-// É aqui que a locação e o status do veículo andam juntos.
+
 export const locacaoService = {
   listar() {
     return locacaoModel.listar();
