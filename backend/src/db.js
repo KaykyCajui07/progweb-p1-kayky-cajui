@@ -44,3 +44,29 @@ db.exec(`
   CREATE UNIQUE INDEX IF NOT EXISTS uq_locacao_ativa_veiculo
     ON locacoes(veiculo_id) WHERE status = 'ativa';
 `);
+
+// Dados de exemplo: só entram se o banco estiver vazio.
+// No Render grátis o arquivo some a cada reinício; assim a demo nunca abre vazia.
+const { total } = db.prepare('SELECT COUNT(*) AS total FROM clientes').get();
+if (total === 0) {
+  const inserirCliente = db.prepare(
+    'INSERT INTO clientes (nome, cpf, email) VALUES (?, ?, ?)'
+  );
+  const inserirVeiculo = db.prepare(
+    `INSERT INTO veiculos (placa, marca, modelo, ano, cor, valor_diaria, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`
+  );
+
+  const ana = inserirCliente.run('Ana Silva', '11122233344', 'ana@exemplo.com');
+  inserirCliente.run('Bruno Souza', '55566677788', 'bruno@exemplo.com');
+
+  const argo = inserirVeiculo.run('ABC1D23', 'Fiat', 'Argo', 2022, 'Branco', 120, 'alocado');
+  inserirVeiculo.run('DEF4G56', 'Chevrolet', 'Onix', 2023, 'Preto', 135, 'disponivel');
+  inserirVeiculo.run('HIJ7K89', 'Volkswagen', 'T-Cross', 2021, 'Cinza', 180, 'disponivel');
+
+  // Uma locação ativa: o veículo dela já nasce "alocado" 
+  db.prepare(
+    `INSERT INTO locacoes (cliente_id, veiculo_id, data_retirada, status)
+     VALUES (?, ?, ?, 'ativa')`
+  ).run(ana.lastInsertRowid, argo.lastInsertRowid, new Date().toISOString());
+}
