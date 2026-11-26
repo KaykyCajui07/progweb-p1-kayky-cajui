@@ -2,13 +2,13 @@
 # Locadora de Veiculos
 
 
-Uma ou duas frases: o que o sistema faz e para quem.
+Sistema para controlar o aluguel de veículos de uma locadora: cadastro de clientes e veículos, locação e devolução.
 Projeto 1 da disciplina Programação Web (UEPB, 2026.2).
 
 
-- **Aplicação:** https://SEU-FRONT.vercel.app
-- **API:** https://SEU-SERVICO.onrender.com
-- **Vídeo de apresentação:** (link)
+- **Aplicação:** https://p1-kaykycajui.vercel.app
+- **API:** https://p1-kaykycajui-api.onrender.com
+- **Vídeo de apresentação:** https://youtu.be/s-2mNbQOeNE
 
 
 > A API está no plano grátis do Render: o primeiro acesso pode levar cerca de
@@ -63,12 +63,16 @@ npx http-server -p 5500 -c-1     # http://localhost:5500
 Erros seguem o formato `{ "erro": "mensagem" }`.
 
 
+
 ## Regras de negócio
 
-
-- (uma linha por regra: o que é validado e qual status devolve)
-
-
+- Cliente exige `nome` e `cpf` (400); o CPF é único (409).
+- Veículo exige `placa` e `valorDiaria` maior que zero (400); a placa é única (409).
+- Todo veículo novo nasce `disponivel`.
+- Só é possível alugar veículo `disponivel` (409); cliente e veículo precisam existir (404).
+- Ao locar, o veículo passa a `alocado`; ao devolver, volta a `disponivel`.
+- Devolver uma locação já devolvida retorna 409.
+- Não é possível remover cliente ou veículo com locação ativa ou com histórico de locações (409).
 ## Estrutura
 
 
