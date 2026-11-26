@@ -1,6 +1,6 @@
 # Telas do Projeto 1 (S4)
 
-Front: `npx http-server -p 5500 -c-1` em `frontend/` · API: `npm run dev` em `backend/src/` (porta 3001)
+Front: `npx http-server -p 5500 -c-1` em `frontend/` · API: `npm run dev` em `backend/src/` (porta 3000)
 
 ## Os quatro estados de cada lista
 
