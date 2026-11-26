@@ -1,6 +1,6 @@
 # Testes da API — Projeto 1 (S3)
 
-API: Locadora de Veiculos · entidades: Veiculo e Cliente· servidor: `npm run dev` em http://localhost:3001
+API: Locadora de Veiculos · entidades: Veiculo e Cliente· servidor: `npm run dev` em http://localhost:3000
 
 | # | Método | URL | Body | Status obtido | Observação |
 |---|---|---|---|---|---|
